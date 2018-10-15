@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="HtmlEditor.HtmlEditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HtmlEditor"
+            xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <BitmapImage x:Key="BitmapImage_Bold" UriSource="pack://application:,,,/Images/bold.png" />
+        <BitmapImage x:Key="BitmapImage_Erase" UriSource="pack://application:,,,/Images/erase.png" />
+        <BitmapImage x:Key="BitmapImage_HtmlCode" UriSource="pack://application:,,,/Images/htmlcode.png" />
+        <BitmapImage x:Key="BitmapImage_Hyperlink" UriSource="pack://application:,,,/Images/hyperlink.png" />
+        <BitmapImage x:Key="BitmapImage_Image" UriSource="pack://application:,,,/Images/image.png" />
+        <BitmapImage x:Key="BitmapImage_Italic" UriSource="pack://application:,,,/Images/italic.png" />
+        <BitmapImage x:Key="BitmapImage_BulletedList" UriSource="pack://application:,,,/Images/listbullets.png" />
+        <BitmapImage x:Key="BitmapImage_NumberedList" UriSource="pack://application:,,,/Images/listnumbered.png" />
+
+
+        <Style x:Key="EditIcon"
+               TargetType="{x:Type Image}">
+            <Setter Property="Width"
+                    Value="16" />
+            <Setter Property="Height"
+                    Value="16" />
+        </Style>
+        <Style x:Key="ToggleHtml"
+               TargetType="{x:Type RadioButton}">
+            <Setter Property="Margin"
+                    Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border x:Name="Border"
+                                Padding="4,1"
+                                BorderBrush="Transparent"
+                                BorderThickness="1">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="#333399FF"
+                                        TargetName="Border" />
+                                <Setter Property="BorderBrush"
+                                        Value="#FF3399FF"
+                                        TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar x:Name="CommandBar">
+                    <ComboBox x:Name="FontSizeList"
+                              Width="42">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ComboBoxItem}">
+                                <Setter Property="FontSize"
+                                        Value="{Binding Size}" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ToggleButton x:Name="ToggleBold"
+                                  Command="{Binding ToggleBoldCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_Bold}" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="ToggleItalic"
+                                  Command="{Binding ToggleItalicCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_Italic}" />
+                    </ToggleButton>
+                   
+                    
+                    
+                    <!--<ToggleButton x:Name="ToggleFontColor">
+                        <ToggleButton.ContextMenu>
+                            <ContextMenu x:Name="FontColorContextMenu"
+                                         Style="{StaticResource ToggleContextMenu}">
+                                <local:ColorPicker x:Name="FontColorPicker" />
+                            </ContextMenu>
+                        </ToggleButton.ContextMenu>
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="/Smith.WPF.HtmlEditor;Component/Resources/Images/fontcolor.png" />
+                    </ToggleButton>-->
+                    
+                    <Button x:Name="ClearStyleButton"
+                            ToolTip="Clear style"
+                            Command="{Binding ClearStyleCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_Erase}" />
+                    </Button>
+                    <Separator />
+
+                    <ToggleButton x:Name="ToggleBulletedList"
+                                  Command="{Binding ToggleBulletedListCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_BulletedList}" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="ToggleNumberedList"
+                                  Command="{Binding ToggleNumberedListCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_NumberedList}" />
+                    </ToggleButton>
+                  
+                    <Separator />
+
+                    <Button x:Name="InsertHyperlink"
+                            Command="{Binding InsertHyperlinkCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_Hyperlink}" />
+                    </Button>
+                    <Button x:Name="InsertImage"
+                            Command="{Binding InsertImageCommand}">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_Image}" />
+                    </Button>
+                  
+                    <Separator />
+                    <ToggleButton x:Name="ToggleCodeMode">
+                        <Image Style="{StaticResource EditIcon}"
+                               Source="{StaticResource BitmapImage_HtmlCode}" />
+                    </ToggleButton>
+                </ToolBar>
+            </ToolBarTray>
+            <Grid>
+                <TextBox x:Name="CodeEditorTextBox"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         AutoWordSelection="True"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="Wrap" />
+                <WindowsFormsHost x:Name="BrowserHost">
+                    <wf:WebBrowser x:Name="VisualEditor" />
+                </WindowsFormsHost>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>
