@@ -60,10 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HtmlEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HtmlEditorControl2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,9 +71,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="HtmlEditorControl.xaml.cs">
-      <DependentUpon>HtmlEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="HtmlEditorControl2.xaml.cs">
       <DependentUpon>HtmlEditorControl2.xaml</DependentUpon>

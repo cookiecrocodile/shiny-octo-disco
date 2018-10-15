@@ -68,7 +68,7 @@ namespace HtmlEditor
         {
             if (doc != null)
             {
-                doc.execCommand("InsertUnorderedList", false, null);
+                doc.execCommand("insertUnorderedList", false, null);
             }
         }
 
@@ -92,7 +92,7 @@ namespace HtmlEditor
 
         private void ToggleBulletedList_Checked(object sender, RoutedEventArgs e)
         {
-           
+            ToggleUnnumberedList(doc);
         }
 
         private void ToggleNumberedList_Checked(object sender, RoutedEventArgs e)
