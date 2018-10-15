@@ -100,6 +100,24 @@ namespace HtmlEditor
             ToggleOrderedList(doc);
         }
 
+        private void HtmlButton_Click(object sender, RoutedEventArgs e)
+        {
+            var code = doc.body.innerHTML;
+
+            Console.WriteLine(code);
+        }
+
+
+        /*
+         createLink
+    Creates an hyperlink from the selection, but only if there is a selection. 
+    Requires a URI string as a value argument for the hyperlink's href. 
+    The URI must contain at least a single character, which may be whitespace. 
+    (Internet Explorer will create a link with a null value.)
+
+        Gör en liten kontroll som hoppar upp då.
+         
+         */
 
     }
 }

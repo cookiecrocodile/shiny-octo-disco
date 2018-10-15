@@ -54,7 +54,11 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <DockPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar x:Name="CommandBar">
                     <ComboBox x:Name="FontSizeList"
@@ -150,7 +154,9 @@
 
             </Grid>
         </DockPanel>
-       
-        
+
+        <Button Grid.Row="1"
+                Content="Get html"
+                Click="HtmlButton_Click"/>
     </Grid>
 </UserControl>
